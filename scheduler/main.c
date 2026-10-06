@@ -65,7 +65,12 @@ int main(void) {
 
     while (true) {
         // TODO: complete the loop
-    }
+        for (int i = 0; i < task_count; i++) {
+            uint64_t current_time = get_time_ms();
+            if (tasks[i].run_count < tasks[i].max_runs) {
 
+            }
+        }
+    }
     return 0;
 }
