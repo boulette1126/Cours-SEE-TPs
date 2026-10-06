@@ -20,7 +20,9 @@ static int task_count = 0;
 
 uint64_t get_time_ms(void) {
     // TODO: return current time
-    return 0;
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
 }
 
 void task_register(const char *name, uint32_t period_ms, uint32_t max_runs, void (*func)(void)) {
@@ -40,6 +42,8 @@ void task_2_handler(void) {
 int main(void) {
     task_register("SensorTask", 100, 12, task_1_handler); // Runs 12 times
     task_register("LoggerTask", 500, 2, task_2_handler); // Runs 2 time
+
+    printf("clock_gettime() = %llu ms\n", get_time_ms());
 
     while (true) {
         // TODO: complete the loop
